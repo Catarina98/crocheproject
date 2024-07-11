@@ -11,12 +11,10 @@
   
     <input type="number" id="widthStitch" value="3.3" placeholder="Width of 10 stitches">
     <input type="number" id="heigthStitch" value="3.7" placeholder="Height of 10 rows">
-    <button type="submit" onclick="displayProportions()">Show Proportions</button>
-
     <button onclick="displayProportions()">Show Proportions</button>
-    <div id="proportionsContainer">
 
-    </div>
+    <div id="proportionsContainer" class="proportionsContainer"></div>
+    <div id="proportionsContainerVolume" class="proportionsContainer"></div>
 
     <form id="importDataForm">
         <input type="text" id="importData" name="importData" placeholder="Import data">
@@ -30,15 +28,16 @@
         <button type="submit">Add Row</button>
     </form>
 
-    <input type="color" id="colorPicker" name="colorPicker" value="#FFFFFF">
-    <button onclick="onAddColor(document.getElementById('colorPicker').value)">Add Color</button>
-
     <div class="body">
         <div id="circlesContainer">
             <!-- Circles will be dynamically added here -->
         </div>
 
         <div class="options">
+            <div>
+                <input type="color" id="colorPicker" name="colorPicker" value="#FFFFFF">
+                <button onclick="onAddColor(document.getElementById('colorPicker').value)">Add Color</button>
+            </div>
             <button type="button" onclick="removeSelected()">Remove</button>
             <button type="button" onclick="deselectAll()">Deselect All</button>
             <div id="colorsContainer">

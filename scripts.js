@@ -242,7 +242,7 @@ function updateColors(cellsColors){
         let column = parseInt(cellColor[1], 10);
         let color = cellColor[2];
 
-        if (!isNaN(row) && row > 0 && !isNaN(column) && column > 0) {
+        if (!isNaN(row) && !isNaN(column)) {
             circlesContainer.children[row].children[column].setAttribute("fill", color);
     
             onAddColor(color);
@@ -277,32 +277,66 @@ document.getElementById('exportButton').addEventListener('click', exportData);
 
 function displayProportions(){
     let proportionsContainer = document.getElementById('proportionsContainer');
+    let proportionsContainerVolume = document.getElementById('proportionsContainerVolume');
     
     let widthStitch = parseFloat(document.getElementById('widthStitch').value) / 10;
     let heigthStitch = parseFloat(document.getElementById('heigthStitch').value) / 10;
 
     proportionsContainer.innerHTML = '';
+    proportionsContainerVolume.innerHTML = '';
 
     let baseStitch = 10;
+    let baseStitchHeight = baseStitch * heigthStitch / widthStitch;
 
     let maxWidthStitches = 1;
+
+    let heightLevel = 1;
 
     rows.forEach((row, i) => {
         const rowItem = document.createElement('div');
         rowItem.classList.add('proportion-row-item');
         rowItem.style.width = (row * baseStitch) + 'px';
-        rowItem.style.height = (2 * baseStitch) + 'px';
+        rowItem.style.height = baseStitchHeight + 'px';
         rowItem.innerText = row;
         proportionsContainer.appendChild(rowItem);
         
         if(row > maxWidthStitches){
             maxWidthStitches = row;
         }
+
+        const rowItemVolume = document.createElement('div');
+
+        if(i > 0){
+            let height = calculateHeight(rows[i-1], row);
+
+            heightLevel += height;
+
+            rowItemVolume.style.marginTop = (height-1)*baseStitchHeight + 'px';
+        }
+
+        rowItemVolume.classList.add('proportion-row-item');
+        rowItemVolume.style.width = (row * baseStitch) + 'px';
+        rowItemVolume.style.height = baseStitchHeight + 'px';
+
+        proportionsContainerVolume.appendChild(rowItemVolume);
     });
 
     let w = maxWidthStitches * widthStitch / 3.14;
 
     const proportionsSize = document.createElement('div');
-    proportionsSize.innerText = "width: " + w + "; heigth: " + rows.length * heigthStitch;
+    proportionsSize.innerText = "width: " + w + "; heigth: " + heightLevel * heigthStitch;
     proportionsContainer.appendChild(proportionsSize);   
+}
+
+function calculateHeight(previousRowStitches, currentRowStitches){
+
+    let isRowDecrease = currentRowStitches < previousRowStitches;
+
+    let minStitches = isRowDecrease ? currentRowStitches : previousRowStitches;
+
+    let maxStitches = isRowDecrease ? previousRowStitches : currentRowStitches;
+
+    let height = 1 - ((maxStitches - minStitches) / minStitches);
+
+    return isRowDecrease ? -height : height;
 }
