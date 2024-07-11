@@ -295,7 +295,7 @@ function displayProportions(){
     rows.forEach((row, i) => {
         const rowItem = document.createElement('div');
         rowItem.classList.add('proportion-row-item');
-        rowItem.style.width = (row * baseStitch) + 'px';
+        rowItem.style.width = ((row * baseStitch)/3.14) + 'px';
         rowItem.style.height = baseStitchHeight + 'px';
         rowItem.innerText = row;
         proportionsContainer.appendChild(rowItem);
@@ -315,7 +315,7 @@ function displayProportions(){
         }
 
         rowItemVolume.classList.add('proportion-row-item');
-        rowItemVolume.style.width = (row * baseStitch) + 'px';
+        rowItemVolume.style.width = ((row * baseStitch)/3.14) + 'px';
         rowItemVolume.style.height = baseStitchHeight + 'px';
 
         proportionsContainerVolume.appendChild(rowItemVolume);
@@ -323,9 +323,7 @@ function displayProportions(){
 
     let w = maxWidthStitches * widthStitch / 3.14;
 
-    const proportionsSize = document.createElement('div');
-    proportionsSize.innerText = "width: " + w + "; heigth: " + heightLevel * heigthStitch;
-    proportionsContainer.appendChild(proportionsSize);   
+    document.getElementById('proportionsSizes').innerText = "width: " + w.toFixed(2) + "cm; heigth: " + (heightLevel * heigthStitch).toFixed(2) + "cm";
 }
 
 function calculateHeight(previousRowStitches, currentRowStitches){
@@ -340,3 +338,23 @@ function calculateHeight(previousRowStitches, currentRowStitches){
 
     return isRowDecrease ? -height : height;
 }
+
+
+//tabs
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    if(cityName == 'proportions'){
+        displayProportions();
+    }
+  }
