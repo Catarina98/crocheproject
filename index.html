@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Circle Divisions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Croche Circle Pattern</h1>
+  
+    <input type="number" id="widthStitch" value="3.3" placeholder="Width of 10 stitches">
+    <input type="number" id="heigthStitch" value="3.7" placeholder="Height of 10 rows">
+    <button type="submit" onclick="displayProportions()">Show Proportions</button>
+
+    <button onclick="displayProportions()">Show Proportions</button>
+    <div id="proportionsContainer">
+
+    </div>
+
+    <form id="importDataForm">
+        <input type="text" id="importData" name="importData" placeholder="Import data">
+        <button type="submit">Import</button>
+    </form>
+    <button id="exportButton">Export</button>
+
+    <form id="inputForm">
+        <input type="number" id="numberInput" name="numberInput" placeholder="Number of stitches">
+        <input type="number" id="rowNumber" name="rowNumber" placeholder="rowNumber">
+        <button type="submit">Add Row</button>
+    </form>
+
+    <input type="color" id="colorPicker" name="colorPicker" value="#FFFFFF">
+    <button onclick="onAddColor(document.getElementById('colorPicker').value)">Add Color</button>
+
+    <div class="body">
+        <div id="circlesContainer">
+            <!-- Circles will be dynamically added here -->
+        </div>
+
+        <div class="options">
+            <button type="button" onclick="removeSelected()">Remove</button>
+            <button type="button" onclick="deselectAll()">Deselect All</button>
+            <div id="colorsContainer">
+                <!-- Rows will be dynamically added here -->
+            </div>
+            <div id="rowsContainer">
+                <!-- Rows will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
