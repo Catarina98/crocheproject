@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croche Circle Pattern</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Croche Circle Pattern</h1>
+
+    <form id="importDataForm">
+        <input type="text" id="importData" name="importData" placeholder="Import data">
+        <button type="submit" class="button">Import</button>
+    </form>
+    <button id="exportButton" class="button">Export</button>
+    
+    <div class="tab">
+        <button class="tablinks active" onclick="openCity(event, 'configureCircle')">Configure Circle</button>
+        <button class="tablinks" onclick="openCity(event, 'proportions')">Show Proportions</button>
+    </div>
+    
+    <div id="configureCircle" class="tabcontent" style="display: block;">
+        <h3>Configure circle</h3>
+    
+        <form id="inputForm">
+            <input type="number" id="numberInput" name="numberInput" placeholder="Number of stitches">
+            <input type="number" id="rowNumber" name="rowNumber" placeholder="rowNumber">
+            <button type="submit" class="button">Add Row</button>
+        </form>
+
+        <div class="body">
+            <div id="circlesContainer">
+                <!-- Circles will be dynamically added here -->
+            </div>
+
+            <div class="options">
+                <div>
+                    <input type="color" id="colorPicker" name="colorPicker" value="#FFFFFF">
+                    <button class="button" onclick="onAddColor(document.getElementById('colorPicker').value)">Add Color</button>
+                </div>
+                <button class="button" type="button" onclick="removeSelected()">Remove</button>
+                <button class="button" type="button" onclick="deselectAll()">Deselect All</button>
+                <div id="colorsContainer">
+                    <!-- Rows will be dynamically added here -->
+                </div>
+                <div id="rowsContainer">
+                    <!-- Rows will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="proportions" class="tabcontent">
+        <input type="number" id="widthStitch" value="3.3" placeholder="Width of 10 stitches">
+        <input type="number" id="heigthStitch" value="3.7" placeholder="Height of 10 rows">
+        <button class="button" onclick="displayProportions()">Recalculate</button>
+    
+        <div class="proportions-holder">
+            <div id="proportionsContainer" class="proportionsContainer"></div>
+            <div>
+                <div id="proportionsSizes"></div>
+                <div id="proportionsContainerVolume" class="proportionsContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
