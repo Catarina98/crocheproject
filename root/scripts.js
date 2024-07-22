@@ -227,6 +227,8 @@ document.getElementById('importDataForm').addEventListener('submit', function(ev
     }
 
     document.getElementById('importData').value = ''; // Clear input field
+
+    document.getElementById('initialTab').click();
 });
 
 
@@ -334,9 +336,7 @@ function calculateHeight(previousRowStitches, currentRowStitches){
 
     let maxStitches = isRowDecrease ? previousRowStitches : currentRowStitches;
 
-    let height = 1 - ((maxStitches - minStitches) / minStitches);
-
-    return isRowDecrease ? -height : height;
+    return 1 - ((maxStitches - minStitches) / minStitches);
 }
 
 
